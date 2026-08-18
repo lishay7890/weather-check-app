@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Weather app with current conditions and 24-hour history/forecast." />
+  <title>Weather Web App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="weather-app">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">WEATHER DASHBOARD</p>
+          <h1>Weather Web App</h1>
+          <p class="subtitle">
+            Search a location to see current conditions, the previous 24 hours,
+            and the next 24 hours.
+          </p>
+        </div>
+
+        <button id="refreshButton" class="icon-button" type="button" title="Refresh weather" aria-label="Refresh weather">
+          ↻
+        </button>
+      </header>
+
+      <form id="searchForm" class="search-form">
+        <label class="sr-only" for="locationInput">Location</label>
+
+        <input
+          id="locationInput"
+          type="text"
+          placeholder="Enter a city, e.g. Karachi"
+          autocomplete="off"
+          required
+        />
+
+        <button class="primary-button" type="submit">Search</button>
+
+        <button id="locationButton" class="secondary-button" type="button">
+          Use My Location
+        </button>
+      </form>
+
+      <section id="statusPanel" class="status-panel" aria-live="polite">
+        <div id="loader" class="loader hidden" aria-hidden="true"></div>
+        <p id="statusMessage">Enter a location to check the weather.</p>
+      </section>
+
+      <section id="weatherContent" class="weather-content hidden">
+        <section class="current-card">
+          <div class="current-top">
+            <div>
+              <p id="resolvedLocation" class="location-name">--</p>
+              <p id="currentTime" class="current-time">--</p>
+            </div>
+
+            <div id="weatherIcon" class="weather-icon" aria-hidden="true">🌤️</div>
+          </div>
+
+          <div class="current-main">
+            <div>
+              <p id="temperature" class="temperature">--°C</p>
+              <p id="conditions" class="conditions">--</p>
+            </div>
+
+            <div class="metric-grid">
+              <article class="metric-card">
+                <span class="metric-label">Wind Speed</span>
+                <strong id="windSpeed">-- km/h</strong>
+              </article>
+
+              <article class="metric-card">
+                <span class="metric-label">Chance of Rain</span>
+                <strong id="rainChance">--%</strong>
+              </article>
+
+              <article class="metric-card">
+                <span class="metric-label">Feels Like</span>
+                <strong id="feelsLike">--°C</strong>
+              </article>
+
+              <article class="metric-card">
+                <span class="metric-label">Humidity</span>
+                <strong id="humidity">--%</strong>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="timeline-section">
+          <div class="section-heading">
+            <p class="section-kicker">HISTORY</p>
+            <h2>Previous 24 Hours</h2>
+          </div>
+
+          <div id="pastHours" class="hour-strip"></div>
+        </section>
+
+        <section class="timeline-section">
+          <div class="section-heading">
+            <p class="section-kicker">FORECAST</p>
+            <h2>Next 24 Hours</h2>
+          </div>
+
+          <div id="futureHours" class="hour-strip"></div>
+        </section>
+      </section>
+
+      <footer>
+        Weather data provided by Open-Meteo.
+      </footer>
+    </section>
+  </main>
+
+  <script src="weather-api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
